@@ -8,6 +8,7 @@ import { loadChecklist, saveChecklist } from '../repositories/checklistRepositor
 import { loadConditions } from '../repositories/conditionsRepository'
 import { calcRepairRange, INITIAL_COST_EXCLUSIONS } from '../services/cost'
 import { scoreHouse } from '../services/scoring'
+import { HOUSE_PHOTO_FILES } from '../data/housePhotos'
 import { COMMON_SITE_CHECKS } from '../data/siteChecks'
 import { trackEvent } from '../utils/analytics'
 import { manwon, manwonRange, pyeong } from '../utils/format'
@@ -48,6 +49,7 @@ export default function HouseDetail() {
 
   const score = conditions ? scoreHouse(house, conditions) : null
   const repair = calcRepairRange(house.repairItems)
+  const realPhotoCount = HOUSE_PHOTO_FILES[house.id]?.length ?? 0
   const checklistItems = [...COMMON_SITE_CHECKS, ...house.extraSiteChecks]
 
   const toggleCheck = (item: string) => {
@@ -77,16 +79,24 @@ export default function HouseDetail() {
         <p className="mt-1 text-sm text-stone">{house.summary}</p>
 
         <div className="mt-4 grid gap-2 sm:grid-cols-2">
-          <div className="overflow-hidden rounded-2xl">
-            <HouseImage houseId={house.id} label={house.photos[0]?.label} className="h-56 w-full sm:h-64" />
+          <div className={`overflow-hidden rounded-2xl ${realPhotoCount <= 1 ? 'sm:col-span-2' : ''}`}>
+            <HouseImage houseId={house.id} label={house.photos[0]?.label} className="h-56 w-full sm:h-72" />
           </div>
-          <div className="grid grid-cols-3 gap-2 sm:grid-cols-2">
-            {house.photos.slice(1).map((photo, idx) => (
-              <div key={photo.id} className="overflow-hidden rounded-xl">
-                <HouseImage houseId={house.id} label={photo.label} photoIndex={idx + 1} className="h-[104px] w-full sm:h-[124px]" showDemoBadge={false} />
-              </div>
-            ))}
-          </div>
+          {realPhotoCount > 1 && (
+            <div className={`grid gap-2 ${realPhotoCount - 1 === 1 ? 'grid-cols-1' : 'grid-cols-2'}`}>
+              {Array.from({ length: realPhotoCount - 1 }, (_, idx) => (
+                <div key={idx} className="overflow-hidden rounded-xl">
+                  <HouseImage
+                    houseId={house.id}
+                    label={house.photos[idx + 1]?.label}
+                    photoIndex={idx + 1}
+                    className={realPhotoCount - 1 === 1 ? 'h-56 w-full sm:h-72' : 'h-28 w-full sm:h-[140px]'}
+                    showDemoBadge={false}
+                  />
+                </div>
+              ))}
+            </div>
+          )}
         </div>
 
         <dl className="mt-4 grid grid-cols-2 gap-3 rounded-2xl bg-white p-5 text-sm shadow-sm ring-1 ring-sand sm:grid-cols-4">
