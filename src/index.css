@@ -1,0 +1,67 @@
+@import "tailwindcss";
+
+/* 브랜드/로고 전용 손글씨 폰트 — 본문에는 사용하지 않는다 */
+@font-face {
+  font-family: 'EF_jejudoldam';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2210-EF@1.0/EF_jejudoldam.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@theme {
+  --font-sans: 'Pretendard Variable', Pretendard, -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  --font-brand: 'EF_jejudoldam', 'Pretendard Variable', sans-serif;
+
+  /*
+   * 터잡앙 디자인 시스템 컬러 토큰
+   * Background/Primary #FBF9EC · Surface #FFFFFF · Header #33402C
+   * Accent Main #DD923D · Sub #E7B072 · Light #F1CDA5 · Brand Green #658A65
+   * (기존 클래스명 유지 — 값만 새 토큰으로 매핑)
+   */
+  --color-cream: #FBF9EC;
+
+  /* Brand/Green 계열 (pine) — 성공·공개 상태·서브 포인트 */
+  --color-pine-50: #EFF4EF;
+  --color-pine-100: #E3EDE3;
+  --color-pine-500: #658A65;
+  --color-pine-600: #658A65;
+  --color-pine-700: #33402C;
+
+  /* Accent 계열 (citrus) — CTA·강조·주의 */
+  --color-citrus-100: #F1CDA5;
+  --color-citrus-400: #E7B072;
+  --color-citrus-500: #DD923D;
+  --color-citrus-600: #DD923D;
+
+  /* 텍스트 */
+  --color-basalt-500: #5E5E5E;
+  --color-basalt-700: #000000;
+  --color-basalt-900: #000000;
+  --color-mute: #C4C4C4;
+
+  /* 웜 뉴트럴 (크림 톤 파생 — 카드 경계·연한 배경) */
+  --color-sand-100: #F4EFDC;
+  --color-sand-200: #EAE3C9;
+  --color-leaf-100: #EFF4EF;
+  --color-leaf-200: #E3EDE3;
+
+  --shadow-soft: 0 2px 8px rgb(0 0 0 / 0.06);
+}
+
+html {
+  background-color: var(--color-cream);
+  color: #000000;
+}
+
+body {
+  font-family: var(--font-sans);
+  letter-spacing: -0.02em;
+  line-height: 1.5;
+}
+
+::placeholder {
+  color: var(--color-mute);
+  font-size: 13px;
+  font-weight: 500;
+}
