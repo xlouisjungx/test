@@ -159,7 +159,7 @@ export default function SupplierVisitDetail() {
       )}
 
       {error && (
-        <p role="alert" className="mt-4 rounded-xl bg-red-50 px-4 py-3 text-sm font-medium text-red-800">
+        <p role="alert" className="mt-4 rounded-xl border border-tangerine bg-tangerine-light/40 px-4 py-3 text-sm font-semibold text-tangerine-dark">
           {error}
         </p>
       )}
@@ -202,7 +202,7 @@ export default function SupplierVisitDetail() {
             <CircleCheck className="size-4 text-forest" aria-hidden />
             방문 완료 처리
           </button>
-          <button type="button" onClick={() => setShowReject(!showReject)} className="inline-flex items-center gap-1.5 rounded-xl border border-sand px-4 py-2.5 text-sm font-semibold text-stone hover:border-red-300 hover:text-red-700">
+          <button type="button" onClick={() => setShowReject(!showReject)} className="inline-flex items-center gap-1.5 rounded-xl border border-sand px-4 py-2.5 text-sm font-semibold text-stone hover:border-tangerine hover:text-tangerine-dark">
             <CircleX className="size-4" aria-hidden />
             거절
           </button>
@@ -223,7 +223,7 @@ export default function SupplierVisitDetail() {
             {rejectReason === '기타' && (
               <input value={rejectDetail} onChange={(e) => setRejectDetail(e.target.value)} placeholder="사유를 직접 작성해 주세요" className={`${inputCls} mt-2`} />
             )}
-            <button type="button" onClick={reject} className="mt-3 rounded-xl bg-red-700 px-4 py-2.5 text-sm font-bold text-white hover:bg-red-800">
+            <button type="button" onClick={reject} className="mt-3 rounded-xl bg-basalt px-4 py-2.5 text-sm font-bold text-white hover:bg-stone">
               거절 확정
             </button>
           </div>

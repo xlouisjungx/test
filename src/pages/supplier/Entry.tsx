@@ -65,7 +65,7 @@ export default function SupplierEntry() {
       </fieldset>
 
       {error && (
-        <p role="alert" className="mt-4 rounded-xl bg-red-50 px-4 py-3 text-sm font-medium text-red-800">
+        <p role="alert" className="mt-4 rounded-xl border border-tangerine bg-tangerine-light/40 px-4 py-3 text-sm font-semibold text-tangerine-dark">
           {error}
         </p>
       )}

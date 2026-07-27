@@ -38,14 +38,14 @@ export const LISTING_STATUSES = [
 export type ListingStatus = (typeof LISTING_STATUSES)[number]
 
 export const LISTING_STATUS_META: Record<ListingStatus, { label: string; chip: string }> = {
-  draft: { label: '작성 중', chip: 'bg-gray-200 text-gray-700' },
+  draft: { label: '작성 중', chip: 'bg-sand text-stone' },
   incomplete: { label: '정보 미완료', chip: 'bg-tangerine-light text-tangerine-dark' },
-  analysis_pending: { label: '분석 대기', chip: 'bg-[#dce8f2] text-[#3d6785]' },
-  review_required: { label: '검토 필요', chip: 'bg-yellow-100 text-yellow-800' },
+  analysis_pending: { label: '분석 대기', chip: 'bg-tangerine-sub/40 text-tangerine-dark' },
+  review_required: { label: '검토 필요', chip: 'bg-tangerine text-white' },
   ready_to_publish: { label: '공개 가능', chip: 'bg-leaf text-forest-dark' },
   published: { label: '공개 중', chip: 'bg-forest text-white' },
-  paused: { label: '일시 비공개', chip: 'bg-gray-300 text-gray-800' },
-  archived: { label: '보관', chip: 'bg-gray-500 text-white' },
+  paused: { label: '일시 비공개', chip: 'bg-sand text-basalt' },
+  archived: { label: '보관', chip: 'bg-stone text-white' },
 }
 
 export const HOUSE_TYPES = ['단독주택', '농가주택', '다가구주택', '창고 딸린 주택', '기타'] as const
@@ -259,13 +259,13 @@ export const VISIT_STATUSES = [
 export type VisitStatus = (typeof VISIT_STATUSES)[number]
 
 export const VISIT_STATUS_META: Record<VisitStatus, string> = {
-  '신청 접수': 'bg-tangerine-light text-tangerine-dark',
-  '확인 중': 'bg-yellow-100 text-yellow-800',
+  '신청 접수': 'bg-tangerine text-white',
+  '확인 중': 'bg-tangerine-light text-tangerine-dark',
   '방문 확정': 'bg-forest text-white',
-  '일정 변경 요청': 'bg-[#dce8f2] text-[#3d6785]',
-  '방문 거절': 'bg-gray-300 text-gray-800',
+  '일정 변경 요청': 'bg-tangerine-sub/40 text-tangerine-dark',
+  '방문 거절': 'bg-stone text-white',
   '방문 완료': 'bg-leaf text-forest-dark',
-  '신청 취소': 'bg-gray-200 text-gray-600',
+  '신청 취소': 'bg-sand text-stone',
 }
 
 export const REJECT_REASONS = [

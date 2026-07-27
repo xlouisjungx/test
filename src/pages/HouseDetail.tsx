@@ -99,7 +99,7 @@ export default function HouseDetail() {
           )}
         </div>
 
-        <dl className="mt-4 grid grid-cols-2 gap-3 rounded-2xl bg-white p-5 text-sm shadow-sm ring-1 ring-sand sm:grid-cols-4">
+        <dl className="mt-4 grid grid-cols-2 gap-3 rounded-2xl bg-white p-5 text-sm shadow-soft ring-1 ring-sand sm:grid-cols-4">
           <div>
             <dt className="text-xs text-stone">위치</dt>
             <dd className="font-bold">{house.region}</dd>

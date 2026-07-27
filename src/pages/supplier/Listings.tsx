@@ -195,7 +195,7 @@ export default function SupplierListings() {
                 <Link to={`/supplier/listings/${l.id}/preview`} className="inline-flex items-center gap-1 rounded-lg border border-sand px-2.5 py-1.5 text-xs font-semibold hover:border-forest/40">
                   <Eye className="size-3.5" aria-hidden />미리보기
                 </Link>
-                <button type="button" onClick={() => togglePublish(l)} className={`inline-flex items-center gap-1 rounded-lg px-2.5 py-1.5 text-xs font-bold ${l.status === 'published' ? 'bg-gray-200 text-gray-700 hover:bg-gray-300' : 'bg-forest text-white hover:bg-forest-dark'}`}>
+                <button type="button" onClick={() => togglePublish(l)} className={`inline-flex items-center gap-1 rounded-lg px-2.5 py-1.5 text-xs font-bold ${l.status === 'published' ? 'bg-sand text-basalt hover:bg-tangerine-light/60' : 'bg-forest text-white hover:bg-forest-dark'}`}>
                   {l.status === 'published' ? (
                     <>
                       <PauseCircle className="size-3.5" aria-hidden />일시 비공개

@@ -78,7 +78,7 @@ export default function Compare() {
       </p>
       <p className="mt-1 text-xs text-stone sm:hidden">← 표를 옆으로 밀어 세 집을 모두 확인하세요.</p>
 
-      <div className="mt-5 overflow-x-auto rounded-2xl bg-white shadow-sm ring-1 ring-sand">
+      <div className="mt-5 overflow-x-auto rounded-2xl bg-white shadow-soft ring-1 ring-sand">
         <table className="w-full border-collapse">
           <caption className="sr-only">빈집 3채 비교표</caption>
           <thead>

@@ -16,9 +16,9 @@ export const DEMO_HOUSES: House[] = [
     deposit: 2000,
     monthlyRent: 45,
     photos: [
+      { id: 'living', label: '거실·내부' },
+      { id: 'room', label: '방 내부' },
       { id: 'exterior', label: '외관·돌담' },
-      { id: 'living', label: '거실' },
-      { id: 'kitchen', label: '주방' },
       { id: 'yard', label: '마당·창고' },
     ],
     farmDistanceKm: 2.1,
@@ -261,8 +261,8 @@ export const DEMO_HOUSES: House[] = [
     monthlyRent: 50,
     photos: [
       { id: 'exterior', label: '외관' },
-      { id: 'living', label: '거실' },
-      { id: 'room', label: '방 내부' },
+      { id: 'side', label: '외관 측면' },
+      { id: 'porch', label: '정면·마루' },
       { id: 'alley', label: '진입로' },
     ],
     farmDistanceKm: 6.2,

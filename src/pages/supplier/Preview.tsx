@@ -76,7 +76,7 @@ export default function SupplierPreview() {
             type="button"
             onClick={publish}
             disabled={!check.ok || listing.status === 'published'}
-            className="inline-flex items-center gap-2 rounded-xl bg-forest px-5 py-3 text-sm font-bold text-white hover:bg-forest-dark disabled:cursor-not-allowed disabled:bg-gray-300 disabled:text-gray-500"
+            className="inline-flex items-center gap-2 rounded-xl bg-forest px-5 py-3 text-sm font-bold text-white hover:bg-forest-dark disabled:cursor-not-allowed disabled:bg-tangerine-light disabled:text-white"
           >
             <Globe className="size-4" aria-hidden />
             {listing.status === 'published' ? '공개 중' : '이 매물 공개하기'}

@@ -43,7 +43,7 @@ function ResultCard({ ranked }: { ranked: RankedHouse }) {
 
   return (
     <article
-      className={`rounded-2xl bg-white shadow-sm ring-1 ${
+      className={`rounded-2xl bg-white shadow-soft ring-1 ${
         isTop ? 'ring-2 ring-tangerine' : 'ring-sand'
       }`}
       aria-label={`${rank}순위 ${house.name}`}

@@ -160,7 +160,7 @@ export default function Conditions() {
         ))}
       </ol>
 
-      <div className="mt-6 rounded-2xl bg-white p-5 shadow-sm ring-1 ring-sand sm:p-7">
+      <div className="mt-6 rounded-2xl bg-white p-5 shadow-soft ring-1 ring-sand sm:p-7">
         {step === 0 && (
           <div className="space-y-6">
             <fieldset>
@@ -338,7 +338,7 @@ export default function Conditions() {
         )}
 
         {error && (
-          <p role="alert" className="mt-5 rounded-xl bg-red-50 px-4 py-3 text-sm font-medium text-red-800">
+          <p role="alert" className="mt-5 rounded-xl border border-tangerine bg-tangerine-light/40 px-4 py-3 text-sm font-semibold text-tangerine-dark">
             {error}
           </p>
         )}

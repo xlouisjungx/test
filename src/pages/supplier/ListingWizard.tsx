@@ -574,7 +574,7 @@ export default function ListingWizard() {
                   const has = photos.covered.includes(c)
                   const na = listing.photoNA.includes(c)
                   return (
-                    <li key={c} className={`flex items-center justify-between gap-1 rounded-lg px-2.5 py-1.5 text-xs ${na ? 'bg-gray-100 text-gray-500' : has ? 'bg-leaf text-forest-dark' : 'bg-tangerine-light/50 text-tangerine-dark'}`}>
+                    <li key={c} className={`flex items-center justify-between gap-1 rounded-lg px-2.5 py-1.5 text-xs ${na ? 'bg-sand text-stone' : has ? 'bg-leaf text-forest-dark' : 'bg-tangerine-light/50 text-tangerine-dark'}`}>
                       <span className="font-medium">{c}</span>
                       {na ? (
                         <button type="button" onClick={() => toggleNA(c)} className="underline">해당 없음 취소</button>
@@ -629,7 +629,7 @@ export default function ListingWizard() {
                             <input type="checkbox" checked={p.isPublic} onChange={(e) => updatePhoto(p.id, { isPublic: e.target.checked })} className="size-3.5 accent-[#658a65]" />
                             공개
                           </label>
-                          <button type="button" onClick={() => removePhoto(p.id)} className="ml-auto inline-flex items-center gap-1 rounded-lg border border-sand px-2 py-1 text-xs text-stone hover:border-red-300 hover:text-red-700">
+                          <button type="button" onClick={() => removePhoto(p.id)} className="ml-auto inline-flex items-center gap-1 rounded-lg border border-sand px-2 py-1 text-xs text-stone hover:border-tangerine hover:text-tangerine-dark">
                             <Trash2 className="size-3" aria-hidden />
                             삭제
                           </button>
@@ -648,7 +648,7 @@ export default function ListingWizard() {
         )}
 
         {error && (
-          <p role="alert" className="mt-5 rounded-xl bg-red-50 px-4 py-3 text-sm font-medium text-red-800">
+          <p role="alert" className="mt-5 rounded-xl border border-tangerine bg-tangerine-light/40 px-4 py-3 text-sm font-semibold text-tangerine-dark">
             {error}
           </p>
         )}

@@ -111,7 +111,7 @@ export default function VisitRequest() {
       <p className="mt-1 text-sm text-stone">신청 내용은 시연용으로 이 브라우저에만 저장돼요.</p>
 
       {/* 선택한 빈집 요약 */}
-      <div className="mt-5 flex items-center gap-4 rounded-2xl bg-white p-4 shadow-sm ring-1 ring-sand">
+      <div className="mt-5 flex items-center gap-4 rounded-2xl bg-white p-4 shadow-soft ring-1 ring-sand">
         <div className="w-24 shrink-0 overflow-hidden rounded-lg">
           <HouseImage houseId={house.id} className="h-16 w-full" showDemoBadge={false} />
         </div>
@@ -124,7 +124,7 @@ export default function VisitRequest() {
       </div>
 
       <form
-        className="mt-5 space-y-5 rounded-2xl bg-white p-5 shadow-sm ring-1 ring-sand sm:p-7"
+        className="mt-5 space-y-5 rounded-2xl bg-white p-5 shadow-soft ring-1 ring-sand sm:p-7"
         onSubmit={(e) => {
           e.preventDefault()
           void submit()
@@ -254,14 +254,14 @@ export default function VisitRequest() {
         </label>
 
         {fieldError && (
-          <p role="alert" className="rounded-xl bg-red-50 px-4 py-3 text-sm font-medium text-red-800">
+          <p role="alert" className="rounded-xl border border-tangerine bg-tangerine-light/40 px-4 py-3 text-sm font-semibold text-tangerine-dark">
             {fieldError}
           </p>
         )}
         {saveError && (
-          <div role="alert" className="rounded-xl bg-red-50 px-4 py-3 text-sm font-medium text-red-800">
+          <div role="alert" className="rounded-xl border border-tangerine bg-tangerine-light/40 px-4 py-3 text-sm font-semibold text-tangerine-dark">
             <p>{saveError}</p>
-            <button type="submit" className="mt-2 rounded-lg bg-red-700 px-3.5 py-1.5 text-xs font-bold text-white hover:bg-red-800">
+            <button type="submit" className="mt-2 rounded-lg bg-basalt px-3.5 py-1.5 text-xs font-bold text-white hover:bg-stone">
               다시 시도
             </button>
           </div>

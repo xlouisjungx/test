@@ -172,7 +172,7 @@ export default function SupplierAnalysis() {
       </p>
 
       {error && (
-        <p role="alert" className="mt-4 rounded-xl bg-red-50 px-4 py-3 text-sm font-medium text-red-800">
+        <p role="alert" className="mt-4 rounded-xl border border-tangerine bg-tangerine-light/40 px-4 py-3 text-sm font-semibold text-tangerine-dark">
           {error}
         </p>
       )}
@@ -209,7 +209,7 @@ export default function SupplierAnalysis() {
             </div>
             <ul className="mt-3 space-y-3">
               {draftIssues.map((issue) => (
-                <li key={issue.id} className={`rounded-xl border p-4 ${issue.excluded ? 'border-sand bg-gray-50 opacity-60' : 'border-sand'}`}>
+                <li key={issue.id} className={`rounded-xl border p-4 ${issue.excluded ? 'border-sand bg-sand/40 opacity-60' : 'border-sand'}`}>
                   <div className="flex flex-wrap items-center gap-2">
                     <span className="font-bold">{issue.part}</span>
                     <span className="text-xs text-stone">{issue.location} · 관련 사진: {issue.photoCategory || '—'}</span>

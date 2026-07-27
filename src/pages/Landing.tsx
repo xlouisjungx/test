@@ -39,7 +39,7 @@ export default function Landing() {
           <h1 className="mt-4 text-3xl font-extrabold leading-tight tracking-tight text-basalt sm:text-4xl">
             빈집을 살펴보고,
             <br />
-            <span className="font-logo font-normal text-forest">제주에 터잡앙</span>
+            <span className="font-logo text-4xl font-normal text-forest sm:text-5xl">제주에 터잡앙</span>
           </h1>
           <p className="mt-4 text-base leading-relaxed text-stone">
             AI 기반 청년농 맞춤 빈집 분석·비교 서비스. 제한된 제주 방문 일정 안에서{' '}
@@ -54,8 +54,8 @@ export default function Landing() {
             <ArrowRight className="size-5" aria-hidden />
           </Link>
         </div>
-        <div className="overflow-hidden rounded-2xl shadow-sm ring-1 ring-sand">
-          <HouseImage houseId="aewol-stonewall" label="제주 농가주택" className="h-56 w-full sm:h-72" />
+        <div className="overflow-hidden rounded-2xl shadow-soft ring-1 ring-sand">
+          <HouseImage houseId="seongsan-wind" label="제주 농가주택" className="h-56 w-full sm:h-72" />
         </div>
       </section>
 
@@ -66,7 +66,7 @@ export default function Landing() {
         </h2>
         <div className="mt-4 grid gap-4 sm:grid-cols-3">
           {VALUES.map(({ icon: Icon, title, body }) => (
-            <div key={title} className="rounded-2xl bg-white p-5 shadow-sm ring-1 ring-sand">
+            <div key={title} className="rounded-2xl bg-white p-5 shadow-soft ring-1 ring-sand">
               <span className="flex size-10 items-center justify-center rounded-xl bg-leaf text-forest">
                 <Icon className="size-5" aria-hidden />
               </span>

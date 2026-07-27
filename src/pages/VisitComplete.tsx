@@ -40,7 +40,7 @@ export default function VisitComplete() {
         신청 내용이 저장됐어요. 실제 서비스에서는 담당자가 연락드려 일정을 확정하게 돼요.
       </p>
 
-      <dl className="mt-6 space-y-3 rounded-2xl bg-white p-6 text-left shadow-sm ring-1 ring-sand">
+      <dl className="mt-6 space-y-3 rounded-2xl bg-white p-6 text-left shadow-soft ring-1 ring-sand">
         <div className="flex justify-between gap-4">
           <dt className="text-sm text-stone">신청번호</dt>
           <dd className="font-bold">{request.id}</dd>
