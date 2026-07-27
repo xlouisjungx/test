@@ -1,0 +1,48 @@
+@import "tailwindcss";
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css");
+
+@font-face {
+  font-family: "EF_jejudoldam";
+  src: url("https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2007@1.1/EF_jejudoldam.woff")
+    format("woff");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@theme {
+  /* 컬러 토큰 — 터잡앙 디자인 시스템 */
+  --color-cream: #fbf9ec; /* Background / Primary */
+  --color-surface: #ffffff; /* Background / Surface */
+  --color-forest-dark: #33402c; /* Header / Deep Green */
+  --color-forest: #658a65; /* Brand / Green */
+  --color-forest-light: #e9f0e4;
+  --color-leaf: #e9f0e4;
+  --color-tangerine: #dd923d; /* Accent / Main */
+  --color-tangerine-sub: #e7b072; /* Accent / Sub (보조·호버) */
+  --color-tangerine-light: #f1cda5; /* Accent / Light */
+  --color-tangerine-dark: #b8762e; /* 본문용 진한 오렌지 (가독성) */
+  --color-basalt: #000000; /* Text / Primary */
+  --color-stone: #5e5e5e; /* Text / Secondary */
+  --color-disabled: #c4c4c4; /* Text / Disabled */
+  --color-sand: #f1e9da; /* 경계선·구분선 (웜톤) */
+
+  --font-sans: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont,
+    "Apple SD Gothic Neo", "Noto Sans KR", "Segoe UI", sans-serif;
+  --font-logo: "EF_jejudoldam", "Pretendard Variable", sans-serif;
+
+  --shadow-soft: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--color-cream);
+  color: var(--color-basalt);
+  font-family: var(--font-sans);
+  letter-spacing: -0.02em;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
