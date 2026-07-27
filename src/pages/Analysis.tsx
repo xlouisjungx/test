@@ -16,10 +16,60 @@ import { getAnalysisProvider, validateAnalysisResult } from '../providers/photo-
 import { auditRepo, eventsRepo, listingsRepo } from '../repositories'
 import { uid, nowIso } from '../repositories/storage'
 import { photoCompleteness } from '../services/photos'
+import { conditionSummary } from '../services/condition'
 import { buildEstimate, recalcEstimate } from '../services/repair-cost'
 import { Btn, Card, CheckboxRow, ErrorBox, Section, inputCls } from '../components/ui'
 
 const REPAIR_KEYS = Object.keys(REPAIR_ITEM_LABEL) as RepairItemKey[]
+
+/**
+ * 상태 판단 요약 — 항목별 관찰을 수요자가 비교할 수 있는 등급으로 집계한다.
+ * 종합 등급은 '가장 높은 부담' 기준이며 임의의 점수를 만들지 않는다.
+ */
+function ConditionPanel({ issues }: { issues: VisibleIssue[] }) {
+  const s = conditionSummary(issues)
+  const overall = s.overall === 'unknown' ? null : BURDEN_META[s.overall]
+
+  return (
+    <Card className="mb-3">
+      <div className="flex flex-wrap items-center gap-x-3 gap-y-2">
+        <span className="text-sm font-semibold text-basalt-900">상태 판단</span>
+        {overall ? (
+          <span className={`rounded-lg px-2.5 py-1 text-sm font-bold ${overall.cls}`}>
+            수리 부담 {overall.label}
+          </span>
+        ) : (
+          <span className="rounded-lg bg-sand-200 px-2.5 py-1 text-sm font-bold text-basalt-500">판단 불가</span>
+        )}
+        <span className="text-xs text-basalt-500">
+          {s.total > 0 ? '확인된 항목 중 가장 높은 부담 기준' : '판단할 항목이 없습니다'}
+        </span>
+      </div>
+
+      <dl className="mt-3 grid grid-cols-2 gap-2 text-center sm:grid-cols-5">
+        {(['low', 'medium', 'high'] as const).map((level) => (
+          <div key={level} className="rounded-xl bg-cream px-2 py-1.5">
+            <dt className="text-[11px] text-basalt-500">부담 {BURDEN_META[level].label}</dt>
+            <dd className="text-lg font-bold text-basalt-900">{s.counts[level]}</dd>
+          </div>
+        ))}
+        <div className="rounded-xl bg-cream px-2 py-1.5">
+          <dt className="text-[11px] text-basalt-500">사진 판단 불가</dt>
+          <dd className="text-lg font-bold text-basalt-900">{s.insufficientCount}</dd>
+        </div>
+        <div className="rounded-xl bg-cream px-2 py-1.5">
+          <dt className="text-[11px] text-basalt-500">현장 확인 필요</dt>
+          <dd className="text-lg font-bold text-citrus-600">{s.fieldCheckCount}</dd>
+        </div>
+      </dl>
+
+      <p className="mt-2 text-[11px] leading-relaxed text-basalt-500">
+        이 등급은 사진에서 확인된 범위의 <strong>수리 부담</strong>이며, 구조 안전성 판정이 아닙니다. 수요자 화면에도 같은
+        기준의 '수리 부담'으로 표시되고, 적합도 점수와 추천 순위는 수요자 조건에 따라 별도로 계산됩니다.
+      </p>
+    </Card>
+  )
+}
 
 export default function Analysis() {
   const { id } = useParams()
@@ -182,11 +232,12 @@ export default function Analysis() {
       {listing.aiResult && (
         <>
           <Section
-            title={`분석 결과 검토 (${issues.filter((i) => !i.excluded).length}개 항목)`}
+            title="사진에서 확인된 상태"
             aside={<span className="rounded-lg bg-leaf-200 px-2 py-0.5 text-[11px] font-medium text-pine-700">데모 분석 — 분석 결과 예시</span>}
           >
+            <ConditionPanel issues={issues} />
             <p className="mb-3 text-xs text-basalt-500">
-              AI 원본 결과는 보존되며, 아래에서 수정한 값이 최종 공개 결과로 저장됩니다. 검토를 완료해야 매물을 공개할 수 있습니다.
+              AI 원본 결과는 보존되며, 아래에서 수정한 값이 최종 공개 결과로 저장됩니다.
             </p>
             <div className="space-y-3">
               {issues.map((issue) => {
@@ -282,31 +333,31 @@ export default function Analysis() {
               </ul>
             </Card>
 
-            <Card className="mt-4 border-pine-100 bg-pine-50">
-              {listing.review ? (
-                <div className="flex items-start gap-2 text-sm">
-                  <CheckCircle2 className="mt-0.5 h-4 w-4 text-pine-600" aria-hidden />
-                  <div>
-                    <p className="font-medium text-pine-700">검토 완료 — {listing.review.reviewedBy}</p>
-                    <p className="text-xs text-basalt-500">
-                      {new Date(listing.review.reviewedAt).toLocaleString('ko-KR')}
-                      {listing.review.reason && ` · 사유: ${listing.review.reason}`}
-                    </p>
-                  </div>
-                </div>
-              ) : (
-                <div>
-                  <p className="mb-2 text-sm font-medium text-basalt-900">분석결과 승인</p>
-                  <p className="mb-2 text-xs text-basalt-500">위 항목을 확인·수정한 뒤 승인하세요. 승인 전에는 매물을 공개할 수 없습니다.</p>
-                  <div className="flex flex-wrap gap-2">
-                    <input className={`${inputCls} !w-auto flex-1`} value={reviewReason} onChange={(e) => setReviewReason(e.target.value)} placeholder="검토 의견(선택) — 예: 3개 항목 확인, 1건 등급 조정" />
-                    <Btn onClick={approveReview}>
-                      <CheckCircle2 className="h-4 w-4" aria-hidden /> 검토 완료로 승인
-                    </Btn>
-                  </div>
-                </div>
-              )}
-            </Card>
+            {/* 승인은 별도 단계가 아니라 결과 아래 확인 바로 처리한다 */}
+            {listing.review ? (
+              <p className="mt-3 flex flex-wrap items-center gap-1.5 text-xs text-pine-700">
+                <CheckCircle2 className="h-4 w-4" aria-hidden />
+                <span className="font-medium">검토 완료 — {listing.review.reviewedBy}</span>
+                <span className="text-basalt-500">
+                  {new Date(listing.review.reviewedAt).toLocaleString('ko-KR')}
+                  {listing.review.reason && ` · ${listing.review.reason}`}
+                </span>
+              </p>
+            ) : (
+              <div className="mt-3 flex flex-wrap items-center gap-2 rounded-xl border border-pine-100 bg-pine-50 px-3 py-2">
+                <p className="text-xs text-basalt-500">위 상태 판단을 확인했다면 공개 단계로 넘어갈 수 있습니다.</p>
+                <input
+                  className={`${inputCls} !w-auto min-w-[180px] flex-1 !py-1.5 text-xs`}
+                  value={reviewReason}
+                  onChange={(e) => setReviewReason(e.target.value)}
+                  placeholder="검토 의견(선택)"
+                  aria-label="검토 의견"
+                />
+                <Btn onClick={approveReview}>
+                  <CheckCircle2 className="h-4 w-4" aria-hidden /> 확인 완료
+                </Btn>
+              </div>
+            )}
           </Section>
 
           {listing.estimate && (

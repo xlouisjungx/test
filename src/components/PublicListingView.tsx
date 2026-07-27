@@ -10,6 +10,7 @@ import {
   TRANSACTION_TYPE_LABEL,
   TRI_LABEL,
 } from '../data/constants'
+import { conditionSummary } from '../services/condition'
 import { Card, DemoBadge } from './ui'
 
 function money(n?: number): string {
@@ -34,6 +35,7 @@ function priceLine(t: PublicListing['transaction']): string {
 /** 수요자 사이드에서 보이는 매물 상세와 동일한 형태의 뷰 */
 export default function PublicListingView({ listing }: { listing: PublicListing }) {
   const primary = listing.photos.find((p) => p.isPrimary) ?? listing.photos[0]
+  const condition = conditionSummary(listing.issues)
   const rest = listing.photos.filter((p) => p.id !== primary?.id)
 
   return (
@@ -132,7 +134,23 @@ export default function PublicListingView({ listing }: { listing: PublicListing 
           {listing.isDemoAnalysis && (
             <span className="rounded-lg bg-leaf-200 px-1.5 py-0.5 text-[11px] font-medium text-pine-700">데모 분석 — 분석 결과 예시</span>
           )}
+          {/* 공급자가 판단한 종합 등급 — 공급자 화면과 같은 기준·같은 이름으로 표시 */}
+          <span className="ml-auto flex items-center gap-1.5">
+            <span className="text-[11px] text-basalt-500">수리 부담</span>
+            {condition.overall === 'unknown' ? (
+              <span className="rounded-lg bg-sand-200 px-2 py-0.5 text-xs font-bold text-basalt-500">판단 불가</span>
+            ) : (
+              <span className={`rounded-lg px-2 py-0.5 text-xs font-bold ${BURDEN_META[condition.overall].cls}`}>
+                {BURDEN_META[condition.overall].label}
+              </span>
+            )}
+          </span>
         </div>
+        {condition.fieldCheckCount > 0 && (
+          <p className="mb-2 text-xs text-basalt-500">
+            사진 판단 불가 {condition.insufficientCount}건 · 현장 확인 필요 {condition.fieldCheckCount}건
+          </p>
+        )}
         {listing.issues.length === 0 ? (
           <p className="text-sm text-basalt-500">공개된 분석 항목이 없습니다.</p>
         ) : (
